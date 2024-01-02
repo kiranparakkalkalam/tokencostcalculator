@@ -1,9 +1,14 @@
 from flask import Flask, request, jsonify
 from tokencost import calculate_prompt_cost, USD_PER_TPU
+from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
+CORS(app)
+app.config['DEBUG'] = True
+app.config['CORS_SUPPORTS_CREDENTIALS'] = True
 
 @app.route('/calculate', methods=['POST'])
+@cross_origin()
 def calculate_token_cost():
     data = request.json
     prompt = data['prompt']

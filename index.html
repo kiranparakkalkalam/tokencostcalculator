@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Simple Webpage</title>
+  <style>
+    label {
+      display: block;
+      font-weight: bold;
+    }
+    input[type="text"],
+    select {
+      width: 100%;
+      padding: 8px;
+      margin: 8px 0;
+      box-sizing: border-box;
+    }
+    select {
+      width: 100%;
+      padding: 8px;
+      margin: 8px 0;
+      box-sizing: border-box;
+    }
+    button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      margin: 8px 0;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <form>
+    <label for="text">Enter text:</label>
+    <input type="text" id="text" required>
+    <label for="model">Choose a model:</label>
+    <select id="model" required>
+      <option value="">Select a model</option>
+      <option value="gpt-3.5-turbo">gpt-3.5-turbo</option>
+      <option value="model2">Model 2</option>
+      <option value="model3">Model 3</option>
+    </select>
+    <button type="submit">Submit</button>
+  </form>
+  <div id="response"></div>
+  <script>
+    // JavaScript code to call the API with the text and model in the request body
+    // Replace 'yourApiUrl' with the actual API URL
+    const apiUrl = 'http://localhost:5000/calculate';
+    const textInput = document.getElementById('text');
+    const modelSelect = document.getElementById('model');
+
+    function submitForm() {
+      const requestBody = {
+        text: textInput.value,
+        model: modelSelect.value
+      };
+
+      fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(requestBody)
+      })
+        .then(response => response.json())
+        .then(data => {
+          // Handle the API response data
+          console.log(data);
+          document.getElementById('response').innerHTML = JSON.stringify(data);
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    }
+
+    document.querySelector('button').addEventListener('click', submitForm);
+  </script>
+</body>
+</html>
