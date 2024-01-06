@@ -7,8 +7,7 @@ CORS(app)
 app.config['DEBUG'] = True
 app.config['CORS_SUPPORTS_CREDENTIALS'] = True
 
-@app.route('/calculate', methods=['POST'])
-@cross_origin()
+@app.route('/api/token-cost-utility', methods=['POST'])
 def calculate_token_cost():
     data = request.json
     prompt = data['prompt']
@@ -22,7 +21,6 @@ def calculate_token_cost():
         'prompt_cost_in_usd': prompt_decimal_notation
     }
     return jsonify(response_data)
-    
 
 if __name__ == '__main__':
     app.run()
