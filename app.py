@@ -3,7 +3,7 @@ from tokencost import calculate_prompt_cost, USD_PER_TPU
 from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={r"/*": {"origins": "*"}})
 app.config['DEBUG'] = True
 app.config['CORS_SUPPORTS_CREDENTIALS'] = True
 
@@ -20,7 +20,9 @@ def calculate_token_cost():
         'prompt_cost': prompt_cost,
         'prompt_cost_in_usd': prompt_decimal_notation
     }
-    return jsonify(response_data)
+    response = jsonify(response_data)
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    return response
 
 if __name__ == '__main__':
     app.run()
