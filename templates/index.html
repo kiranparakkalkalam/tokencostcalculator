@@ -1,30 +1,46 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Simple Webpage</title>
+  <title>Token Cost Calculator</title>
   <style>
+    header, footer {
+      background-color: #f1f1f1;
+      padding: 10px;
+      text-align: center;
+      font-size: 24px;
+    }
+    .form-container {
+      width: 50%;
+      margin: 0 auto;
+    }
     label {
       display: block;
       font-weight: bold;
+      margin-bottom: 8px;
     }
-    input[type="text"],
+    input[type="text"]
+    {
+      width: 100%; 
+      padding: 100px; /* Increased padding for larger height */
+      margin-bottom: 8px;
+      box-sizing: border-box;
+      font-size: 16px; /* Larger font size */
+    }
     select {
-      width: 100%;
+      width: 100%; /* Make input fields full width of the form container */
       padding: 8px;
-      margin: 8px 0;
+      margin-bottom: 8px;
       box-sizing: border-box;
     }
-    select {
-      width: 100%;
-      padding: 8px;
-      margin: 8px 0;
-      box-sizing: border-box;
+    .button-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 8px;
     }
     button {
       background-color: #4CAF50;
       color: white;
       padding: 10px 20px;
-      margin: 8px 0;
       border: none;
       cursor: pointer;
     }
@@ -40,18 +56,27 @@
   </style>
 </head>
 <body>
-  <form>
-    <label for="text">Enter text:</label>
-    <input type="text" id="text" required>
-    <label for="model">Choose a model:</label>
-    <select id="model" required>
-      <option value="">Select a model</option>
-      <option value="gpt-3.5-turbo">gpt-3.5-turbo</option>
-      <option value="model2">Model 2</option>
-      <option value="model3">Model 3</option>
-    </select>
-    <button type="submit">Submit</button>
-  </form>
+  <header>Prompt Token Cost Calculator</header>
+  
+  <div class="form-container">
+    <form>
+      <label for="text">Enter prompt:</label>
+      <input type="text" id="text" required>
+      
+      <label for="model">Choose a model:</label>
+      <select id="model" required>
+        <option value="">Select a model</option>
+        <option value="gpt-3.5-turbo">gpt-3.5-turbo</option>
+        <option value="model2">Model 2</option>
+        <option value="model3">Model 3</option>
+      </select>
+
+      <div class="button-container">
+        <button type="submit">Submit</button>
+      </div>
+    </form>
+  </div>
+
   <div id="table-container"></div>
   <script>
     // JavaScript code to call the API with the text and model in the request body
