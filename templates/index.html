@@ -28,6 +28,15 @@
       border: none;
       cursor: pointer;
     }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th, td {
+      border: 1px solid black;
+      padding: 8px;
+      text-align: left;
+    }
   </style>
 </head>
 <body>
@@ -43,17 +52,20 @@
     </select>
     <button type="submit">Submit</button>
   </form>
-  <div id="response"></div>
+  <div id="table-container"></div>
   <script>
     // JavaScript code to call the API with the text and model in the request body
     // Replace 'yourApiUrl' with the actual API URL
-    const apiUrl = 'http://localhost:5000/calculate';
+    const apiUrl = 'http://127.0.0.1:5000/api/token-cost-utility';
     const textInput = document.getElementById('text');
     const modelSelect = document.getElementById('model');
+    const tableContainer = document.getElementById('table-container');
 
-    function submitForm() {
+
+    function submitForm(event) {
+      event.preventDefault(); // Prevent default form submission
       const requestBody = {
-        text: textInput.value,
+        prompt: textInput.value,
         model: modelSelect.value
       };
 
@@ -66,16 +78,26 @@
       })
         .then(response => response.json())
         .then(data => {
-          // Handle the API response data
-          console.log(data);
-          document.getElementById('response').innerHTML = JSON.stringify(data);
+          const table = `<table>
+                       <tr>
+                         <th>Model</th>
+                         <th>Prompt Cost in TPU</th>
+                         <th>Prompt Cost in USD</th>
+                       </tr>
+                       <tr>
+                         <td>${data.response.model}</td>
+                         <td>${data.response.prompt_cost}</td>
+                         <td>${data.response.prompt_cost_in_usd}</td>
+                       </tr>
+                     </table>`;
+          tableContainer.innerHTML = table;
         })
         .catch(error => {
           console.error(error);
+          responseDiv.textContent = 'Error: ' + error; // Display errors
         });
     }
-
-    document.querySelector('button').addEventListener('click', submitForm);
+    document.querySelector('form').addEventListener('submit', submitForm);
   </script>
 </body>
 </html>
