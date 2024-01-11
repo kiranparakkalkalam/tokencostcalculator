@@ -69,9 +69,6 @@
       <label for="model">Choose a model:</label>
       <select id="model" required>
         <option value="">Select a model</option>
-        <!-- <option value="gpt-3.5-turbo">gpt-3.5-turbo</option>
-        <option value="model2">Model 2</option>
-        <option value="model3">Model 3</option> -->
         <script>
           // Example array of options
           const models = ['gpt-3.5-turbo',
@@ -102,7 +99,6 @@
                   dropdown.appendChild(opt);
               });
           }
-
           // Call the function to populate the dropdown
           populateDropdown(models);
         </script>
@@ -115,9 +111,7 @@
   </div>
   <div class="response-table-container">
     <div id="table-container"></div>
-    <script>
-      // JavaScript code to call the API with the text and model in the request body
-      // Replace 'yourApiUrl' with the actual API URL
+    <script>    
       const apiUrl = 'http://127.0.0.1:5000/api/token-cost-utility';
       const textInput = document.getElementById('text');
       const modelSelect = document.getElementById('model');
