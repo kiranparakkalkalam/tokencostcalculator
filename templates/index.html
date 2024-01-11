@@ -69,9 +69,43 @@
       <label for="model">Choose a model:</label>
       <select id="model" required>
         <option value="">Select a model</option>
-        <option value="gpt-3.5-turbo">gpt-3.5-turbo</option>
+        <!-- <option value="gpt-3.5-turbo">gpt-3.5-turbo</option>
         <option value="model2">Model 2</option>
-        <option value="model3">Model 3</option>
+        <option value="model3">Model 3</option> -->
+        <script>
+          // Example array of options
+          const models = ['gpt-3.5-turbo',
+                          'gpt-3.5-turbo-instruct',
+                          'gpt-3.5-turbo-0301',
+                          'gpt-3.5-turbo-0613',
+                          'gpt-3.5-turbo-1106',
+                          'gpt-3.5-turbo-16k',
+                          'gpt-3.5-turbo-16k-0613',
+                          'gpt-4',
+                          'gpt-4-0314',
+                          'gpt-4-0613',
+                          'gpt-4-32k',
+                          'gpt-4-32k-0314',
+                          'gpt-4-32k-0613',
+                          'gpt-4-1106-preview',
+                          'gpt-4-vision-preview',
+        ]
+          // Get the select element
+          const dropdown = document.getElementById("model");
+
+          // Function to populate the dropdown
+          function populateDropdown(options) {
+              options.forEach(option => {
+                  let opt = document.createElement("option");
+                  opt.value = option;
+                  opt.textContent = option;
+                  dropdown.appendChild(opt);
+              });
+          }
+
+          // Call the function to populate the dropdown
+          populateDropdown(models);
+        </script>
       </select>
 
       <div class="button-container">
